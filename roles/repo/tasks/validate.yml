@@ -1,0 +1,36 @@
+---
+- name: Gather OS facts
+  when:
+    - ansible_distribution is not defined or
+      ansible_distribution_major_version is not defined or
+      ansible_distribution_release is not defined or
+      ansible_distribution_version is not defined or
+      ansible_os_family is not defined
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+      - distribution_major_version
+      - distribution_release
+      - os_family
+
+- name: Include OS specific variables
+  ansible.builtin.include_vars: "{{ _file }}"
+  vars:
+    _file: "{{ lookup('first_found', _params) }}"
+    _params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+        - fallback.yml
+      paths:
+        - "{{ role_path }}/vars"
+
+- name: Validate OS is supported.
+  ansible.builtin.assert:
+    that:
+      - _hashicorp_supported_distribution
+    fail_msg: "This role does not support {{ ansible_distribution }} {{ ansible_distribution_version }}."
+    success_msg: "This role supports {{ ansible_distribution }} {{ ansible_distribution_version }}."

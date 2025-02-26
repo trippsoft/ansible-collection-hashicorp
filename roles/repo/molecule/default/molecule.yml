@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  cachier: machine
+  parallel: true
+platforms:
+  - name: linux
+    box: jtarpley/${MOLECULE_BOX:-rocky9_cis}
+    memory: 2048
+    cpus: 2
+    provider_options:
+      default_prefix: hashicorp_repo_
+    groups:
+      - subjects
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,40 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  tasks:
+    - name: Check if HashiCorp Packer package is installed
+      check_mode: true
+      become: true
+      ansible.builtin.package:
+        name:
+          - packer
+        state: present
+      register: _packer_package
+      ignore_errors: true
+
+    - name: Verify HashiCorp Packer package is installed
+      ansible.builtin.assert:
+        that:
+          - _packer_package is changed
+          - _packer_package is success
+        fail_msg: HashiCorp Packer package can not be installed.
+        success_msg: HashiCorp Packer package can be installed.
+
+    - name: Check if HashiCorp Vault package is installed
+      check_mode: true
+      become: true
+      ansible.builtin.package:
+        name:
+          - vault
+        state: present
+      register: _vault_package
+      ignore_errors: true
+
+    - name: Verify HashiCorp Vault package is installed
+      ansible.builtin.assert:
+        that:
+          - _vault_package is changed
+          - _vault_package is success
+        fail_msg: HashiCorp Vault package can not be installed.
+        success_msg: HashiCorp Vault package can be installed.

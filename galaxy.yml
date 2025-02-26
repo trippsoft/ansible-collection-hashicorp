@@ -1,0 +1,31 @@
+---
+namespace: trippsc2
+name: hashicorp
+version: 1.0.0
+readme: README.md
+authors:
+  - Jim Tarpley (@trippsc2)
+description: This collection contains a role to install the HashiCorp repository.
+
+license_file: 'LICENSE'
+
+tags:
+  - application
+  - infrastructure
+  - linux
+  - security
+  - tools
+
+dependencies: {}
+
+repository: https://github.com/trippsc2/ansible-collection-hashicorp.git
+
+manifest:
+  directives:
+    - recursive-include roles/* *.md
+    - recursive-include roles/*/files **
+    - exclude galaxy.yml galaxy.yaml MANIFEST.json FILES.json *.tar.gz
+    - recursive-exclude tests/output **
+    - recursive-exclude roles/*/molecule **
+    - recursive-exclude molecule **
+    - global-exclude /.* /__pycache__

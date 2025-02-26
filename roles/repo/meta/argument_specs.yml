@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Install HashiCorp Repo
+    description:
+      - This role installs the HashiCorp repository.
+    author:
+      - Jim Tarpley (@trippsc2)
+    options: {}
