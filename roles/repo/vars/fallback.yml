@@ -1,2 +1,3 @@
 ---
-_hashicorp_supported_distribution: false
+_hashicorp_os_is_supported: false
+_hashicorp_os_is_tested: false
