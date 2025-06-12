@@ -1,0 +1,25 @@
+---
+name: Generate Role Docs
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+      - roles/repo/.aar_doc.yml
+      - roles/repo/README.md
+      - roles/repo/meta/argument_specs.yml
+      - roles/repo/meta/main.yml
+defaults:
+  run:
+    working-directory: 'trippsc2.hashicorp'
+jobs:
+  docs_repo:
+    name: Generate repo role documentation
+    permissions:
+      contents: write
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.hashicorp'
+      role_name: 'repo'
