@@ -38,6 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         box:
+          - debian13_base
           - debian12_base
           - fedora42_base
           - fedora41_base
