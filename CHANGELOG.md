@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-05-30
+
+### Role - repo
+
+- Added support for Fedora 44.
+
 ## [1.1.0] - 2026-05-29
 
 ### Role - repo

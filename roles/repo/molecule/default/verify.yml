@@ -13,14 +13,6 @@
       register: _packer_package
       ignore_errors: true
 
-    - name: Verify HashiCorp Packer package is installed
-      ansible.builtin.assert:
-        that:
-          - _packer_package is changed
-          - _packer_package is success
-        fail_msg: HashiCorp Packer package can not be installed.
-        success_msg: HashiCorp Packer package can be installed.
-
     - name: Check if HashiCorp Vault package is installed
       check_mode: true
       become: true
@@ -31,10 +23,10 @@
       register: _vault_package
       ignore_errors: true
 
-    - name: Verify HashiCorp Vault package is installed
+    - name: Verify HashiCorp Packer and/or Vault package is installed
       ansible.builtin.assert:
         that:
-          - _vault_package is changed
-          - _vault_package is success
-        fail_msg: HashiCorp Vault package can not be installed.
-        success_msg: HashiCorp Vault package can be installed.
+          - (_packer_package is changed and _packer_package is success) or
+            (_vault_package is changed and _vault_package is success)
+        fail_msg: HashiCorp Packer or Vault package can not be installed.
+        success_msg: HashiCorp Packer and/or Vault package can be installed.
