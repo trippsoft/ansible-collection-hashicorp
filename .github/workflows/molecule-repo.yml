@@ -1,7 +1,6 @@
 ---
 name: Molecule - repo role
 'on':
-  workflow_call: {}
   workflow_dispatch: {}
   pull_request:
     branches:
