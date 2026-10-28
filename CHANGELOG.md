@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-10-28
+
+### Role - repo
+
+- Changed fact gathering to use `ansible_facts` instead of direct variables.
+
 ## [1.2.0] - 2026-05-30
 
 ### Role - repo

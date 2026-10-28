@@ -8,7 +8,7 @@
     _file: "{{ lookup('first_found', _params) }}"
     _params:
       files:
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_facts.distribution }}.yml"
+        - "{{ ansible_facts.os_family }}.yml"
       paths:
         - "{{ role_path }}/tasks"
